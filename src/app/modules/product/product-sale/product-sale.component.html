@@ -1,0 +1,120 @@
+<app-navbar (refreshEvent)="ngOnInit()"></app-navbar>
+
+<div class="container">
+  <h1>{{ "productSale" | translate }}</h1>
+  <form [formGroup]="saleProductForm" (ngSubmit)="submit()">
+    <div class="row">
+      <div class="column">
+        <div class="card flex justify-content-center">
+          <p-dropdown
+            [style]="{ width: '100%' }"
+            [class]="'custom-class'"
+            formControlName="customerId"
+            [options]="customerList"
+            [(ngModel)]="selectedCustomer"
+            optionLabel="companyName"
+            [filter]="true"
+            filterBy="companyName"
+            [showClear]="true"
+            placeholder="Select a Customer"
+            appendTo="body"
+          >
+            <ng-template pTemplate="selectedItem" let-selectedOption>
+              <div class="flex align-items-center">
+                <div>{{ selectedOption.companyName }}</div>
+              </div>
+            </ng-template>
+            <ng-template let-customer pTemplate="item">
+              <div class="flex align-items-center">
+                <div>{{ customer.companyName }}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+        </div>
+      </div>
+      <div class="column">
+        <div class="card flex justify-content-center">
+          <p-dropdown
+            [style]="{ width: '100%' }"
+            [class]="'custom-class'"
+            formControlName="userId"
+            [options]="employeeList"
+            [(ngModel)]="selectedEmployee"
+            optionLabel="firstName"
+            [filter]="true"
+            filterBy="firstName"
+            [showClear]="true"
+            placeholder="Select a Employee"
+            appendTo="body"
+          >
+            <ng-template pTemplate="selectedItem" let-selectedOption>
+              <div class="flex align-items-center">
+                <div>
+                  {{ selectedOption.firstName + " " + selectedOption.lastName }}
+                </div>
+              </div>
+            </ng-template>
+            <ng-template let-employee pTemplate="item">
+              <div class="flex align-items-center">
+                <div>{{ employee.firstName + " " + employee.lastName }}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+        </div>
+      </div>
+    </div>
+    <div class="row" formArrayName="productItems">
+      <div
+        *ngFor="let productGroup of productItems.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <div class="column">
+          <label for="productId">
+            {{ "productSaleDropdownProduct" | translate }}
+          </label>
+          <select formControlName="productId" class="form-select my-2 mb-3">
+            @for (item of productList; track $index) { @if (item.quantity > 0) {
+            <option [value]="item.id">
+              {{ item.productName + " - " + "Stok Adedi: " + item.quantity }}
+            </option>
+            } }
+          </select>
+        </div>
+        <div class="column">
+          <label for="txtCount" class="form-label">
+            {{ "productSaleInputQuantity" | translate }}
+          </label>
+          <input
+            formControlName="count"
+            type="number"
+            class="form-control"
+            id="txtCount"
+            aria-describedby="count"
+          />
+        </div>
+
+        <div class="column">
+          <button type="button" (click)="removeProduct(i)">
+            {{ "removeProductButton" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <label for="issue">
+          {{ "productSaleInputOrderNote" | translate }}
+        </label>
+        <textarea
+          id="issue"
+          placeholder="{{ 'productSaleDescOrderNote' | translate }}"
+          rows="3"
+        ></textarea>
+      </div>
+    </div>
+    <button type="button" (click)="addProduct()">
+      {{ "addProductButton" | translate }}
+    </button>
+    <button type="submit">{{ "completeOrderButton" | translate }}</button>
+  </form>
+</div>

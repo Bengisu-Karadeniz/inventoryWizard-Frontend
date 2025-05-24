@@ -1,0 +1,54 @@
+<h2 mat-dialog-title>{{ title | translate }}</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="acceptProductForm">
+    <div class="formBox form-group">
+      <div class="inputBox w100">
+        <div class="card flex justify-content-center">
+          <p-dropdown
+            [style]="{ width: '100%' }"
+            [class]="'custom-class'"
+            formControlName="productId"
+            [options]="productList"
+            [(ngModel)]="selectedProduct"
+            optionLabel="productName"
+            [filter]="true"
+            filterBy="productName"
+            [showClear]="true"
+            placeholder="Select a Product"
+            appendTo="body"
+          >
+            <ng-template pTemplate="selectedItem" let-selectedOption>
+              <div class="flex align-items-center">
+                <div>{{ selectedOption.productName }}</div>
+              </div>
+            </ng-template>
+            <ng-template let-product pTemplate="item">
+              <div class="flex align-items-center">
+                <div>{{ product.productName }}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+        </div>
+      </div>
+      <div class="inputBox w100">
+        <input formControlName="count" required />
+        <label for="txtCount"> {{ "shelfInputsPeace" | translate }} </label>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions class="btn-dialog" align="end">
+  <div class="btn-modal">
+    <button class="btn btn-outline-secondary" (click)="close()">
+      {{ "cancelButton" | translate }}
+    </button>
+    <button
+      class="btn btn-outline-primary"
+      [disabled]="!acceptProductForm.valid"
+      (click)="create()"
+    >
+      {{ "createButton" | translate }}
+    </button>
+  </div>
+</mat-dialog-actions>

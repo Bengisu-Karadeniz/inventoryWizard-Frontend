@@ -1,0 +1,154 @@
+<app-navbar (refreshEvent)="ngOnInit()"></app-navbar>
+
+<div style="background: #faf9ff" class="row stat-cards me-5 ms-5">
+  <div class="col-md-6 col-xl-4 mb-5">
+    <article
+      style="
+        border-radius: 2rem;
+        border: 1px solid #e2e5ff;
+        box-shadow: 0px 2px 4px rgba(221, 221, 221, 0.8);
+      "
+      class="stat-cards-item"
+    >
+      <div class="stat-cards-icon primary">
+        <i data-feather="bar-chart-2" aria-hidden="true"></i>
+      </div>
+      <div class="stat-cards-info">
+        <p class="stat-cards-info__num">
+          {{ totalSales | currency : "TRY" : "symbol" : "1.2-2" }}
+        </p>
+        <p class="stat-cards-info__title">
+          {{ "reportTotalSales" | translate }}
+        </p>
+      </div>
+    </article>
+  </div>
+  <div class="col-md-6 col-xl-4 mb-5">
+    <article
+      style="
+        border-radius: 2rem;
+        border: 1px solid #e2e5ff;
+        box-shadow: 0px 2px 4px rgba(221, 221, 221, 0.8);
+      "
+      class="stat-cards-item"
+    >
+      <div class="stat-cards-icon warning">
+        <i data-feather="file" aria-hidden="true"></i>
+      </div>
+      <div class="stat-cards-info">
+        <p class="stat-cards-info__num">
+          {{ winning | currency : "TRY" : "symbol" : "1.2-2" }}
+        </p>
+        <p class="stat-cards-info__title">
+          {{ "reportTotalWinning" | translate }}
+        </p>
+      </div>
+    </article>
+  </div>
+  <div class="col-md-6 col-xl-4 mb-5">
+    <article
+      style="
+        border-radius: 2rem;
+        border: 1px solid #e2e5ff;
+        box-shadow: 0px 2px 4px rgba(221, 221, 221, 0.8);
+      "
+      class="stat-cards-item"
+    >
+      <div class="stat-cards-icon purple">
+        <i data-feather="file" aria-hidden="true"></i>
+      </div>
+      <div class="stat-cards-info">
+        <p class="stat-cards-info__num">
+          {{ totalSalesCost | currency : "TRY" : "symbol" : "1.2-2" }}
+        </p>
+        <p class="stat-cards-info__title">
+          {{ "repotTotalSalesCost" | translate }}
+        </p>
+      </div>
+    </article>
+  </div>
+  <!--RECENT ORDERS-->
+
+  <div class="col-md-6 col-xl-4 mb-5">
+    <article
+      (click)="navigateRecentOrders()"
+      style="
+        border-radius: 2rem;
+        border: 1px solid #e2e5ff;
+        box-shadow: 0px 2px 4px rgba(221, 221, 221, 0.8);
+      "
+      class="stat-cards-item report-item"
+    >
+      <div class="stat-cards-icon purple">
+        <i data-feather="file" aria-hidden="true"></i>
+      </div>
+      <div class="stat-cards-info">
+        <p class="stat-cards-info__num">
+          {{ "reportRecentOrder" | translate }}
+        </p>
+      </div>
+    </article>
+  </div>
+
+  <!--TOP ORDERERS-->
+  <div class="col-md-6 col-xl-4 mb-5">
+    <article
+      (click)="navigateTopOrderers()"
+      style="
+        border-radius: 2rem;
+        border: 1px solid #e2e5ff;
+        box-shadow: 0px 2px 4px rgba(221, 221, 221, 0.8);
+      "
+      class="stat-cards-item report-item"
+    >
+      <div class="stat-cards-icon purple">
+        <i data-feather="file" aria-hidden="true"></i>
+      </div>
+      <div class="stat-cards-info">
+        <p class="stat-cards-info__num">
+          {{ "reportTopOrderers" | translate }}
+        </p>
+      </div>
+    </article>
+  </div>
+  <!--MOST ORDER SENDERS-->
+  <div class="col-md-6 col-xl-4 mb-5">
+    <article
+      (click)="navigateMostOrderSenders()"
+      style="
+        border-radius: 2rem;
+        border: 1px solid #e2e5ff;
+        box-shadow: 0px 2px 4px rgba(221, 221, 221, 0.8);
+      "
+      class="stat-cards-item report-item"
+    >
+      <div class="stat-cards-icon purple">
+        <i data-feather="file" aria-hidden="true"></i>
+      </div>
+      <div class="stat-cards-info">
+        <p class="stat-cards-info__num">{{ "mostOrderSenders" | translate }}</p>
+      </div>
+    </article>
+  </div>
+  <!--BEST SELLING PRODUCTS-->
+  <div class="col-md-6 col-xl-4 mb-5">
+    <article
+      (click)="navigateBestSellingProducts()"
+      style="
+        border-radius: 2rem;
+        border: 1px solid #e2e5ff;
+        box-shadow: 0px 2px 4px rgba(221, 221, 221, 0.8);
+      "
+      class="stat-cards-item report-item"
+    >
+      <div class="stat-cards-icon purple">
+        <i data-feather="file" aria-hidden="true"></i>
+      </div>
+      <div class="stat-cards-info">
+        <p class="stat-cards-info__num">
+          {{ "bestSellingProducts" | translate }}
+        </p>
+      </div>
+    </article>
+  </div>
+</div>

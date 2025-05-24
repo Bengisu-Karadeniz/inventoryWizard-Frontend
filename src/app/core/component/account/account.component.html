@@ -1,0 +1,119 @@
+<app-navbar></app-navbar>
+<div
+  style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+  "
+>
+  <form
+    [formGroup]="accountForm"
+    (ngSubmit)="submit()"
+    style="
+      width: 50%;
+      border: 2px solid #e2e5ff;
+      padding: 50px;
+      border-radius: 20px;
+      background-color: white;
+    "
+  >
+    <div class="mb-3">
+      <label for="txtEmail" class="form-label">
+        {{ "settingsFormEmail" | translate }}
+      </label>
+      <input
+        formControlName="email"
+        type="text"
+        class="form-control"
+        id="txtEmail"
+        aria-describedby="e-mail"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="txtLastPassword" class="form-label">
+        {{ "settingsFormCurrentPassword" | translate }}
+      </label>
+      <input
+        formControlName="lastPassword"
+        type="password"
+        class="form-control"
+        id="txtLastPassword"
+        aria-describedby="lastPassword"
+        [class.is-invalid]="
+          accountForm.get('lastPassword')?.hasError('incorrectPassword')
+        "
+      />
+      <div
+        *ngIf="accountForm.get('lastPassword')?.hasError('incorrectPassword')"
+        class="small text-danger"
+      >
+        {{ "oldPasswordWrong" | translate }}
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="txtPassword" class="form-label">
+        {{ "settingsFormNewPassword" | translate }}
+      </label>
+      <input
+        formControlName="password"
+        type="password"
+        class="form-control"
+        [class.is-invalid]="
+          !accountForm.get('password')?.valid &&
+          accountForm.get('password')?.touched
+        "
+        id="txtPassword"
+        aria-describedby="password"
+      />
+      <div
+        *ngIf="
+          !accountForm.get('password')?.valid &&
+          accountForm.get('password')?.touched
+        "
+        class="small text-danger"
+      >
+        <div *ngIf="accountForm.get('password')?.errors?.['required'] ">
+          {{ "passwordCannotEmpty" | translate }}
+        </div>
+        <div *ngIf="accountForm.get('password')?.errors?.['minlength']">
+          {{ "passwordMustBe" | translate }}
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="txtPassword2" class="form-label">
+        {{ "settingsFormNewConfirmPassword" | translate }}
+      </label>
+      <input
+        formControlName="password2"
+        type="password"
+        class="form-control"
+        id="txtPassword2"
+        aria-describedby="password2"
+        [class.is-invalid]="
+          accountForm.get('password2')?.hasError('passwordMismatch')
+        "
+        (input)="checkPasswordMatch()"
+      />
+      <div
+        *ngIf="accountForm.get('password2')?.hasError('passwordMismatch')"
+        class="small text-danger"
+      >
+        {{ "doNotMatchPassword" | translate }}
+      </div>
+    </div>
+    <div style="float: right">
+      <button class="btn btn-outline-secondary me-2" [routerLink]="['..']">
+        {{ "cancelButton" | translate }}
+      </button>
+      <button
+        class="btn btn-outline-primary"
+        type="submit"
+        [disabled]="!accountForm.valid"
+      >
+        {{ "saveButton" | translate }}
+      </button>
+    </div>
+  </form>
+</div>
